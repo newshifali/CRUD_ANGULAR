@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-4">
+        <h1 class="text-center">User List</h1>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">ID</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Email Id</th>
+              <th class="text-center">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users;let indexOfelement=index;">
+              <td>{{indexOfelement}}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{user.mobail}}</td>
+  
+              <td>
+                <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditUserForm(user)">Edit</button>
+  
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeUser(user)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-success" (click)="showAddUserForm()">Add New User</button>
+  
+        <div class="mt-4">
+          <form *ngIf="userForm" #userlistform="ngForm">
+          <h2>Add New User</h2>
+           <p>First Name: <input type="text" name="firstName" #fname="ngModel" required [(ngModel)]="newUser.firstName" />
+          <span style="color:red" *ngIf="fname.invalid">Name not Enter</span></p>
+          
+          <p>Email: <input type="email" name="email" #email="ngModel" email required [(ngModel)]="newUser.email" />
+          <span style="color:red" *ngIf="email.invalid">Email not Enter</span></p>
+         
+            <p>Mobile No: <input type="number"pattern="^((\\+91-?)|0)?[0-9]{10}$" name="mobail" #mobail="ngModel" required minlength="10" maxlength="10" [(ngModel)]="newUser.mobail" />
+            <span style="color:red" *ngIf="mobail.invalid">Mobile not Enter</span></p>
+            <p>
+              <button type="button" class="btn btn-primary mr-2" [disabled]="userlistform.invalid"  (click)="saveUser(newUser)">Submit</button>
+              <button type="button" class="btn btn-warning" (click)="cancelNewUser()">Cancel</button>
+            </p>
+          </form>
+  
+          <form *ngIf="editUserForm">
+            <h2>Edit User Details</h2>
+            <p>Name: <input type="text" name="firstName" [(ngModel)]="editedUser.firstName" /></p>
+            <p>Email Id: <input type="email" name="email" [(ngModel)]="editedUser.email" />
+            <p>mobail: <input type="number" name="mobail" [(ngModel)]="editedUser.mobail" /></p>
+
+            <p>
+              <button type="button" class="btn btn-primary mr-2" (click)="updateUser()">Submit</button>
+              <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,24 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Login Page </title>
+</head>  
+<body>  
+    <form [formGroup]="loginForm" (ngSubmit)="loginFormFun()" > 
+      <h1>Login Form</h1>
+        <div class="container"> 
+            <label>Username : </label> 
+       <input type="text" name="user"  formControlName="user">
+            <br><span *ngIf="user && user.invalid" style="color: red">Username Not Enter</span><br>
+            <label>Password : </label> 
+            <input type="text" name="password" formControlName="password">
+            <br><span *ngIf="password && password.invalid " [disabled]="loginForm.invalid" style="color: red">Password Not Enter</span><br>
+           
+            <button  type="submit"  [disabled]="loginForm.invalid" >Login</button> 
+            <!-- <button  type="submit" class="btn" [routerLink]="['/userlist']">Login</button>  -->
+            <!-- <button class="btn" (ngClick)="gotopage()"> Cancel</button>  -->
+        </div> 
+    </form>   
+</body>   
+</html>
